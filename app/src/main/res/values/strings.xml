@@ -3,4 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="authenticator_label">Guru</string>
+    <string name="authenticator_accountType">guru.windroilla.com</string>
 </resources>
