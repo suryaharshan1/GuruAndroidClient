@@ -6,8 +6,8 @@ package com.windroilla.guru.authenticator;
 public class RequestAccessTokenByRefresh {
     public static final String grant_type = "refresh_token";
     public final String refresh_token;
-    public final String client_id = "";
-    public final String client_secret = "";
+    public final String client_id = "testclient";
+    public final String client_secret = "testpass";
     public final String scope;
 
     public RequestAccessTokenByRefresh(String refresh_token, String scope) {

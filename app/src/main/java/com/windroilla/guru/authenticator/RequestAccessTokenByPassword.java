@@ -5,10 +5,10 @@ package com.windroilla.guru.authenticator;
  */
 public class RequestAccessTokenByPassword {
     public static final String grant_type = "password";
-    public final String client_id = "";
-    public final String client_secret = "";
     public final String username;
     public final String password;
+    public final String client_id = "testclient";
+    public final String client_secret = "testpass";
 
     public RequestAccessTokenByPassword(String username, String password) {
         this.username = username;
