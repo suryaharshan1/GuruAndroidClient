@@ -12,7 +12,7 @@ import retrofit.RequestInterceptor;
 /**
  * Created by Surya Harsha Nunnaguppala on 19/6/15.
  */
-public class ApiHeaders implements RequestInterceptor{
+public final class ApiHeaders implements RequestInterceptor{
 
     private Application application;
 
