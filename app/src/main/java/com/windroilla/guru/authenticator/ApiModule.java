@@ -29,7 +29,7 @@ public final class ApiModule {
 
     @Provides
     @Singleton
-    @Named("ClientId") String provideClientId() {
+    @Named("ClientId") public String provideClientId() {
         return CLIENT_ID;
     }
 
