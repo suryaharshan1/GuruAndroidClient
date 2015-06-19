@@ -25,7 +25,9 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".GuruAuthenticatorService" >
+        <service android:name=".authenticator.GuruAuthenticatorService"
+            android:exported="false"
+            android:process=":auth">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>

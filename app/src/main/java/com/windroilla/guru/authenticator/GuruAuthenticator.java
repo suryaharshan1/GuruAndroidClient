@@ -1,4 +1,4 @@
-package com.windroilla.guru;
+package com.windroilla.guru.authenticator;
 
 import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
@@ -12,7 +12,12 @@ import android.os.Bundle;
  */
 public class GuruAuthenticator extends AbstractAccountAuthenticator{
 
-    public GuruAuthenticator (Context context) { super(context);}
+    private final Context context;
+
+    public GuruAuthenticator (Context context) {
+        super(context);
+        this.context = context;
+    }
 
     @Override
     public Bundle editProperties(AccountAuthenticatorResponse response, String accountType) {

@@ -1,4 +1,4 @@
-package com.windroilla.guru;
+package com.windroilla.guru.authenticator;
 
 import android.app.Service;
 import android.content.Intent;
