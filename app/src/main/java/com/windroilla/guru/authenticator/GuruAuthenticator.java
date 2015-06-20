@@ -39,9 +39,9 @@ public class GuruAuthenticator extends AbstractAccountAuthenticator{
     @Override
     public Bundle addAccount(AccountAuthenticatorResponse response, String accountType, String authTokenType, String[] requiredFeatures, Bundle options) throws NetworkErrorException {
         Log.d(TAG,"addAccount()");
-        final Intent intent = new Intent(context,AuthenticatorActivity.class);
+        final Intent intent = new Intent(context,GuruAuthenticatorActivity.class);
         intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, accountType);
-        intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE,authTokenType);
+        intent.putExtra(GuruAuthenticatorActivity.ARG_AUTH_TYPE,authTokenType);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
         final Bundle bundle = new Bundle();
         bundle.putParcelable(AccountManager.KEY_INTENT, intent);
@@ -89,9 +89,9 @@ public class GuruAuthenticator extends AbstractAccountAuthenticator{
 
         // Otherwise... start the login intent
         Log.i(TAG,"Starting login activity");
-        final Intent intent = new Intent(context, AuthenticatorActivity.class);
-        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_NAME, account.name);
-        intent.putExtra(AuthenticatorActivity.ARG_AUTH_TYPE, authTokenType);
+        final Intent intent = new Intent(context, GuruAuthenticatorActivity.class);
+        intent.putExtra(GuruAuthenticatorActivity.ARG_ACCOUNT_NAME, account.name);
+        intent.putExtra(GuruAuthenticatorActivity.ARG_AUTH_TYPE, authTokenType);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
         bundle.putParcelable(AccountManager.KEY_INTENT, intent);
 

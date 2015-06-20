@@ -16,7 +16,7 @@ import com.windroilla.guru.R;
 /**
  * Created by Surya Harsha Nunnaguppala on 20/6/15.
  */
-public class AuthenticatorActivity extends AccountAuthenticatorActivity {
+public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
     public final static String ARG_ACCOUNT_TYPE = "ACCOUNT_TYPE";
     public final static String ARG_AUTH_TYPE = "AUTH_TYPE";
     public final static String ARG_ACCOUNT_NAME = "ACCOUNT_NAME";
@@ -61,7 +61,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
         //findViewById(R.id.signUp).setOnClickListener(new View.OnClickListener() {
         //    @Override
         //    public void onClick(View v) {
-                // Since there can only be one AuthenticatorActivity, we call the sign up activity, get his results,
+                // Since there can only be one GuruAuthenticatorActivity, we call the sign up activity, get his results,
                 // and return them in setAccountAuthenticatorResult(). See finishLogin().
         //        Intent signup = new Intent(getBaseContext(), SignUpActivity.class);
         //        signup.putExtras(getIntent().getExtras());
