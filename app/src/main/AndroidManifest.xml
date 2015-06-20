@@ -46,6 +46,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.windroilla.guru.HelperActivity" />
         </activity>
+
+        <activity
+            android:name=".authenticator.GuruAuthenticatorActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:excludeFromRecents="true"
+            android:hardwareAccelerated="true" />
+
+
     </application>
 
 </manifest>
