@@ -3,15 +3,18 @@ package com.windroilla.guru.authenticator;
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountManager;
+import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.windroilla.guru.MainActivity;
 import com.windroilla.guru.R;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Created by Surya Harsha Nunnaguppala on 20/6/15.
@@ -29,10 +32,17 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
     private final int REQ_SIGNUP = 1;
 
     private final String TAG = this.getClass().getSimpleName();
-
-    private AccountManager mAccountManager;
+    @Inject
+    @Named("ClientId")
+    String clientId;
+    @Inject
+    @Named("ClientSecret")
+    String clientSecret;
+    @Inject
+    AccountManager mAccountManager;
+    @Inject
+    ApiService apiService;
     private String mAuthTokenType;
-
 
     /**
      * Called when the activity is first created.
@@ -41,7 +51,6 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mAccountManager = AccountManager.get(getBaseContext());
 
         String accountName = getIntent().getStringExtra(ARG_ACCOUNT_NAME);
         mAuthTokenType = getIntent().getStringExtra(ARG_AUTH_TYPE);
@@ -87,7 +96,7 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
 
         final String accountType = getIntent().getStringExtra(ARG_ACCOUNT_TYPE);
 
-        new AsyncTask<String, Void, Intent>() {
+        /*new AsyncTask<String, Void, Intent>() {
 
             @Override
             protected Intent doInBackground(String... params) {
@@ -121,7 +130,9 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
                     finishLogin(intent);
                 }
             }
-        }.execute();
+        }.execute();*/
+
+        doLogin(userName, userPass);
     }
 
     private void finishLogin(Intent intent) {
@@ -149,4 +160,56 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
         setResult(RESULT_OK, intent);
         finish();
     }
+
+    private Account addOrFindAccount(String email, String password) {
+        Account[] accounts = mAccountManager.getAccountsByType(AuthConstants.ACCOUNT_TYPE);
+        Account account = accounts.length != 0 ? accounts[0] :
+                new Account(email, AuthConstants.ACCOUNT_TYPE);
+
+        if (accounts.length == 0) {
+            mAccountManager.addAccountExplicitly(account, password, null);
+        } else {
+            mAccountManager.setPassword(accounts[0], password);
+        }
+        return account;
+    }
+
+    private void finishAccountAdd(String accountName, String authToken, String password) {
+        final Intent intent = new Intent();
+        intent.putExtra(AccountManager.KEY_ACCOUNT_NAME, accountName);
+        intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, AuthConstants.ACCOUNT_TYPE);
+        if (authToken != null)
+            intent.putExtra(AccountManager.KEY_AUTHTOKEN, authToken);
+        intent.putExtra(AccountManager.KEY_PASSWORD, password);
+        setAccountAuthenticatorResult(intent.getExtras());
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+
+        // Go back to the main activity
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
+    private void doLogin(final String email, String password) {
+        /*Observable<AccessToken> accessTokenObservable =
+                apiService.getAccessTokenObservable(new RequestAccessTokenByPassword(email, password));
+
+        subscribe(accessTokenObservable, new EndlessObserver<AccessToken>() {
+            @Override public void onNext(AccessToken accessToken) {
+                Account account = addOrFindAccount(email, accessToken.getRefreshToken());
+                mAccountManager.setAuthToken(account, AuthConstants.AUTHTOKEN_TYPE, accessToken.getAccessToken());
+                finishAccountAdd(email, accessToken.getAccessToken(), accessToken.getRefreshToken());
+            }
+
+            @Override public void onError(Throwable throwable) {
+                Log.e(TAG, throwable + " Could not sign in");
+                Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });*/
+
+        AccessToken accessToken = apiService.getAccessToken(new RequestAccessTokenByPassword(email, password));
+        Account account = addOrFindAccount(email, accessToken.getRefreshToken());
+        mAccountManager.setAuthToken(account, AuthConstants.AUTHTOKEN_TYPE, accessToken.getAccessToken());
+        finishAccountAdd(email, accessToken.getAccessToken(), accessToken.getRefreshToken());
+    }
+
 }

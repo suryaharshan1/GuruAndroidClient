@@ -23,7 +23,7 @@ import retrofit.converter.GsonConverter;
         library = true
 )
 public final class ApiModule {
-    public static final String PRODUCTION_API_URL = "http://localhost/guru/";
+    public static final String PRODUCTION_API_URL = "http://192.168.43.45/guru/";
     private static final String CLIENT_ID = "CLIENT_ID";
     private static final String CLIENT_SECRET = "CLIENT_SECRET";
 

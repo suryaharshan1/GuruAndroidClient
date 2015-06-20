@@ -1,17 +1,30 @@
 package com.windroilla.guru;
 
-import android.support.v7.app.ActionBarActivity;
+import android.accounts.AccountManager;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.windroilla.guru.authenticator.GuruAuthenticatorActivity;
+
+import javax.inject.Inject;
 
 
 public class HelperActivity extends ActionBarActivity {
 
+    @Inject
+    AccountManager accountManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_helper);
+        //setContentView(R.layout.activity_helper);
+        //Account[] accounts = accountManager.getAccountsByType(AuthConstants.ACCOUNT_TYPE);
+        //accountManager.getAuthToken(accounts[0],AuthConstants.AUTHTOKEN_TYPE,null,null,null,null);
+        startActivity(new Intent(this, GuruAuthenticatorActivity.class));
+        finish();
     }
 
     @Override

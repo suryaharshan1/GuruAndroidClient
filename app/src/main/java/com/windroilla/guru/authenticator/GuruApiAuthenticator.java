@@ -86,6 +86,7 @@ public class GuruApiAuthenticator implements Authenticator{
 
     @Override
     public Request authenticateProxy(Proxy proxy, Response response) throws IOException {
+        Log.d(TAG, "authenticateProxy");
         return null;
     }
 }
