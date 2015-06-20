@@ -1,5 +1,6 @@
 package com.windroilla.guru.authenticator;
 
+import android.accounts.AccountManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -9,15 +10,17 @@ import android.os.IBinder;
  */
 public class GuruAuthenticatorService extends Service{
 
-    private GuruAuthenticator mAuthenticator;
-
-    @Override
-    public void onCreate() {
-        mAuthenticator = new GuruAuthenticator(this);
-    }
+    private static GuruAuthenticator mAuthenticator = null;
 
     @Override
     public IBinder onBind(Intent intent) {
-        return mAuthenticator.getIBinder();
+        return intent.getAction().equals(AccountManager.ACTION_AUTHENTICATOR_INTENT)? mAuthenticator.getIBinder() : null;
     }
+
+    private GuruAuthenticator getAuthenticator() {
+        if (mAuthenticator == null)
+            mAuthenticator = new GuruAuthenticator(this);
+        return mAuthenticator;
+    }
+
 }
