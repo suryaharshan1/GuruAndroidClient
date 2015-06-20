@@ -11,4 +11,6 @@ public interface AuthConstants {
     String PROVIDER_AUTHORITY = "com.windroilla.sync";
 
     String AUTHTOKEN_TYPE = ACCOUNT_TYPE;
+
+    String SCOPE_DEFAULT = "default";
 }
