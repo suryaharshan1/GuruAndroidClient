@@ -1,6 +1,8 @@
 package com.windroilla.guru.authenticator;
 
 import android.accounts.AccountManager;
+import android.app.Application;
+import android.content.Context;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
@@ -25,7 +27,12 @@ public final class ApiModule {
     public static final String PRODUCTION_API_URL = "http://192.168.43.45/guru/";
     private static final String CLIENT_ID = "testclient";
     private static final String CLIENT_SECRET = "testpass";
-    public static AccountManager accountManager;
+    private Context context;
+
+    public ApiModule(Context context) {
+        this.context = context;
+    }
+
     @Provides
     @Singleton
     @Named("ClientId") public String provideClientId() {
@@ -41,12 +48,32 @@ public final class ApiModule {
         return Endpoints.newFixedEndpoint(PRODUCTION_API_URL);
     }
 
+
     @Provides @Singleton
+    OkHttpClient provideOkHttpClient() {
+        return new OkHttpClient();
+    }
+
+    @Provides
+    @Singleton
     Client provideClient(OkHttpClient client) {
         return new OkClient(client);
     }
 
+
     @Provides @Singleton
+    ApiHeaders provideApiHeaders(Application application) {
+        return new ApiHeaders(application);
+    }
+
+    @Provides
+    @Singleton
+    Gson provideGson() {
+        return new Gson();
+    }
+
+    @Provides
+    @Singleton
     RestAdapter provideRestAdapter(Endpoint endpoint, Client client, ApiHeaders headers, Gson gson) {
         return new RestAdapter.Builder()
                 .setClient(client)
@@ -63,8 +90,14 @@ public final class ApiModule {
 
     @Provides
     @Singleton
+    Application provideApplication() {
+        return (Application) context;
+    }
+
+    @Provides
+    @Singleton
     AccountManager provideAccountManager() {
-        return accountManager = AccountManager.get(null);
+        return AccountManager.get(context);
     }
     //@Provides @Singleton ApiDatabase provideApiDatabase(ApiService service) {
     //    return new ApiDatabase(service);
