@@ -22,7 +22,7 @@ public class HelperActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_helper);
+        ((GuruApp) getApplication()).graph().inject(this);
         Account[] accounts = accountManager.getAccountsByType(AuthConstants.ACCOUNT_TYPE);
         if (accounts.length == 0) {
             startActivity(new Intent(this, GuruAuthenticatorActivity.class));
