@@ -1,5 +1,7 @@
 package com.windroilla.guru.authenticator;
 
+import android.accounts.AccountManager;
+
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -18,15 +20,12 @@ import retrofit.converter.GsonConverter;
 /**
  * Created by Surya Harsha Nunnaguppala on 19/6/15.
  */
-@Module(
-        complete = false,
-        library = true
-)
+@Module
 public final class ApiModule {
     public static final String PRODUCTION_API_URL = "http://192.168.43.45/guru/";
-    private static final String CLIENT_ID = "CLIENT_ID";
-    private static final String CLIENT_SECRET = "CLIENT_SECRET";
-
+    private static final String CLIENT_ID = "testclient";
+    private static final String CLIENT_SECRET = "testpass";
+    public static AccountManager accountManager;
     @Provides
     @Singleton
     @Named("ClientId") public String provideClientId() {
@@ -62,6 +61,11 @@ public final class ApiModule {
         return restAdapter.create(ApiService.class);
     }
 
+    @Provides
+    @Singleton
+    AccountManager provideAccountManager() {
+        return accountManager = AccountManager.get(null);
+    }
     //@Provides @Singleton ApiDatabase provideApiDatabase(ApiService service) {
     //    return new ApiDatabase(service);
     //}
