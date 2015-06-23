@@ -1,9 +1,8 @@
 package com.windroilla.guru.authenticator;
 
-import android.database.Observable;
-
 import retrofit.http.Body;
 import retrofit.http.POST;
+import rx.Observable;
 
 /**
  * Created by Surya Harsha Nunnaguppala on 19/6/15.
