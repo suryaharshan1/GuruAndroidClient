@@ -19,12 +19,11 @@ import javax.inject.Named;
  */
 public class GuruAuthenticator extends AbstractAccountAuthenticator{
 
+    private static final String TAG = GuruAuthenticator.class.getSimpleName();
     private final Context context;
     @Inject @Named("ClientId") String clientId;
     @Inject @Named("ClientSecret") String clientSecret;
     @Inject ApiService apiService;
-
-    private static final String TAG = GuruAuthenticator.class.getSimpleName();
 
     public GuruAuthenticator (Context context) {
         super(context);
@@ -73,8 +72,10 @@ public class GuruAuthenticator extends AbstractAccountAuthenticator{
         final String password = accountManager.getPassword(account);
         if (password != null) {
             Log.i(TAG,"Trying to refresh access token");
+            //TODO Change the method of refresh token being acquired and check the injection if necessary
             try {
-                AccessToken accessToken = apiService.refreshAccessToken(new RequestAccessTokenByRefresh(password, AuthConstants.SCOPE_DEFAULT));
+                Log.d(TAG, "client_id " + clientId + " client_secret " + clientSecret);
+                AccessToken accessToken = apiService.refreshAccessToken(new RequestAccessTokenByRefresh(password, clientId, clientSecret, AuthConstants.SCOPE_DEFAULT));
                 if (accessToken!=null && !TextUtils.isEmpty(accessToken.getAccessToken())) {
                     bundle.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
                     bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, account.type);

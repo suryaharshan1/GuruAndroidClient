@@ -42,15 +42,6 @@
         </service>
 
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
-            android:parentActivityName=".HelperActivity"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.windroilla.guru.HelperActivity" />
-        </activity>
-        <activity
             android:name=".authenticator.GuruAuthenticatorActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:excludeFromRecents="true"

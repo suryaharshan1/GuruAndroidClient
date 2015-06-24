@@ -2,6 +2,7 @@ package com.windroilla.guru;
 
 import com.windroilla.guru.authenticator.ApiHeaders;
 import com.windroilla.guru.authenticator.ApiModule;
+import com.windroilla.guru.authenticator.GuruAuthenticator;
 import com.windroilla.guru.authenticator.GuruAuthenticatorActivity;
 
 import javax.inject.Singleton;
@@ -21,5 +22,7 @@ public interface GuruGraph {
     void inject(GuruAuthenticatorActivity activity);
 
     void inject(ApiHeaders apiHeaders);
+
+    void inject(GuruAuthenticator guruAuthenticator);
 
 }
