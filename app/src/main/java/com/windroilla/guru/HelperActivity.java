@@ -29,6 +29,7 @@ public class HelperActivity extends ActionBarActivity {
         } else {
             startActivity(new Intent(this, MainActivity.class));
         }
+        overridePendingTransition(0, 0);
         finish();
     }
 
