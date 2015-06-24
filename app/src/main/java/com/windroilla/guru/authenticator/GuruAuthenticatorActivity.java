@@ -9,12 +9,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.windroilla.guru.GuruApp;
 import com.windroilla.guru.MainActivity;
 import com.windroilla.guru.R;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Surya Harsha Nunnaguppala on 20/6/15.
@@ -50,6 +55,7 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        GuruApp.getsInstance().graph().inject(this);
         setContentView(R.layout.activity_login);
 
         String accountName = getIntent().getStringExtra(ARG_ACCOUNT_NAME);
@@ -190,26 +196,32 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
     }
 
     private void doLogin(final String email, String password) {
-        /*Observable<AccessToken> accessTokenObservable =
-                apiService.getAccessTokenObservable(new RequestAccessTokenByPassword(email, password));
 
-        subscribe(accessTokenObservable, new EndlessObserver<AccessToken>() {
-            @Override public void onNext(AccessToken accessToken) {
-                Account account = addOrFindAccount(email, accessToken.getRefreshToken());
-                mAccountManager.setAuthToken(account, AuthConstants.AUTHTOKEN_TYPE, accessToken.getAccessToken());
-                finishAccountAdd(email, accessToken.getAccessToken(), accessToken.getRefreshToken());
-            }
+        apiService.getAccessTokenObservable(new RequestAccessTokenByPassword(email, password))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.newThread())
+                .subscribe(
+                        new Action1<AccessToken>() {
+                            @Override
+                            public void call(AccessToken accessToken) {
+                                Account account = addOrFindAccount(email, accessToken.getRefreshToken());
+                                mAccountManager.setAuthToken(account, AuthConstants.AUTHTOKEN_TYPE, accessToken.getAccessToken());
+                                finishAccountAdd(email, accessToken.getAccessToken(), accessToken.getRefreshToken());
+                            }
+                        },
+                        new Action1<Throwable>() {
+                            @Override
+                            public void call(Throwable throwable) {
+                                Log.e(TAG, throwable + " Could not sign in");
+                                Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
 
-            @Override public void onError(Throwable throwable) {
-                Log.e(TAG, throwable + " Could not sign in");
-                Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });*/
-
-        AccessToken accessToken = apiService.getAccessToken(new RequestAccessTokenByPassword(email, password));
-        Account account = addOrFindAccount(email, accessToken.getRefreshToken());
-        mAccountManager.setAuthToken(account, AuthConstants.AUTHTOKEN_TYPE, accessToken.getAccessToken());
-        finishAccountAdd(email, accessToken.getAccessToken(), accessToken.getRefreshToken());
+        //AccessToken accessToken = apiService.getAccessToken(new RequestAccessTokenByPassword(email, password));
+        //Account account = addOrFindAccount(email, accessToken.getRefreshToken());
+        //mAccountManager.setAuthToken(account, AuthConstants.AUTHTOKEN_TYPE, accessToken.getAccessToken());
+        //finishAccountAdd(email, accessToken.getAccessToken(), accessToken.getRefreshToken());
     }
 
 }
