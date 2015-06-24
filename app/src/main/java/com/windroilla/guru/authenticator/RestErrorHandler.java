@@ -20,28 +20,28 @@ public class RestErrorHandler implements ErrorHandler{
         if (r != null) {
             switch (r.getStatus()) {
                 case 401:
-                    Log.d(TAG, "Unauthorized Exception");
+                    Log.d(TAG, "Unauthorized Exception: " + ((GuruApiErrorResponse) cause.getBodyAs(GuruApiErrorResponse.class)).message);
                     break;
                 case 403:
-                    Log.d(TAG, "Forbidden Exception");
+                    Log.d(TAG, "Forbidden Exception: " + ((GuruApiErrorResponse) cause.getBodyAs(GuruApiErrorResponse.class)).message);
                     break;
                 case 404:
-                    Log.d(TAG, "Not Found Exception");
+                    Log.d(TAG, "Not Found Exception: " + ((GuruApiErrorResponse) cause.getBodyAs(GuruApiErrorResponse.class)).message);
                     break;
                 case 400:
-                    Log.d(TAG, "Bad Request Exception");
+                    Log.d(TAG, "Bad Request Exception: " + ((GuruApiErrorResponse) cause.getBodyAs(GuruApiErrorResponse.class)).message);
                     break;
                 case 409:
-                    Log.d(TAG, "Conflict Exception");
+                    Log.d(TAG, "Conflict Exception: " + ((GuruApiErrorResponse) cause.getBodyAs(GuruApiErrorResponse.class)).message);
                     break;
                 case 500:
-                    Log.d(TAG, "Internal Server Error Exception");
+                    Log.d(TAG, "Internal Server Error Exception: " + ((GuruApiErrorResponse) cause.getBodyAs(GuruApiErrorResponse.class)).message);
                     break;
                 case 503:
-                    Log.d(TAG, "Service Unavailable Exception");
+                    Log.d(TAG, "Service Unavailable Exception: " + ((GuruApiErrorResponse) cause.getBodyAs(GuruApiErrorResponse.class)).message);
                     break;
                 case 504:
-                    Log.d(TAG, "Gateway Timeout Exception");
+                    Log.d(TAG, "Gateway Timeout Exception: " + ((GuruApiErrorResponse) cause.getBodyAs(GuruApiErrorResponse.class)).message);
                     break;
             }
         }

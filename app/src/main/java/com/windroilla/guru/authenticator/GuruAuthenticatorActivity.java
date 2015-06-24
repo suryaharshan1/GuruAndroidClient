@@ -197,7 +197,7 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
 
     private void doLogin(final String email, String password) {
 
-        apiService.getAccessTokenObservable(new RequestAccessTokenByPassword(email, password))
+        apiService.getAccessTokenObservable(new RequestAccessTokenByPassword(email, password, clientId, clientSecret))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(Schedulers.newThread())
                 .subscribe(
@@ -217,11 +217,6 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
                             }
                         }
                 );
-
-        //AccessToken accessToken = apiService.getAccessToken(new RequestAccessTokenByPassword(email, password));
-        //Account account = addOrFindAccount(email, accessToken.getRefreshToken());
-        //mAccountManager.setAuthToken(account, AuthConstants.AUTHTOKEN_TYPE, accessToken.getAccessToken());
-        //finishAccountAdd(email, accessToken.getAccessToken(), accessToken.getRefreshToken());
     }
 
 }
