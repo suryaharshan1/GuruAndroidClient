@@ -62,8 +62,8 @@ public final class ApiModule {
 
 
     @Provides @Singleton
-    ApiHeaders provideApiHeaders(Application application) {
-        return new ApiHeaders(application);
+    ApiHeaders provideApiHeaders() {
+        return new ApiHeaders();
     }
 
     @Provides

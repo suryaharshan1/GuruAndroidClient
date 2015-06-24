@@ -2,7 +2,6 @@ package com.windroilla.guru.authenticator;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.app.Application;
 import android.text.TextUtils;
 
 import javax.inject.Inject;
@@ -14,22 +13,15 @@ import retrofit.RequestInterceptor;
  */
 public final class ApiHeaders implements RequestInterceptor{
 
-    AccountManager accountManager;
-    private Application application;
-
     @Inject
-    public ApiHeaders(Application application) {
-        this.application = application;
-    }
-
+    AccountManager accountManager;
 
     @Override
     public void intercept(RequestFacade request) {
-        accountManager = AccountManager.get(application);
         Account[] accounts = accountManager.getAccountsByType(AuthConstants.ACCOUNT_TYPE);
         if (accounts.length != 0) {
             String token = accountManager.peekAuthToken(accounts[0],AuthConstants.AUTHTOKEN_TYPE);
-            if(TextUtils.isEmpty(token)){
+            if (!TextUtils.isEmpty(token)) {
                 request.addHeader("Authorization", "Bearer " + token);
             }
         }
