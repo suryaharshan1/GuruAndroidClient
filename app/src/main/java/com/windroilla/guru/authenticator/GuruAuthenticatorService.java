@@ -14,7 +14,12 @@ public class GuruAuthenticatorService extends Service{
 
     @Override
     public IBinder onBind(Intent intent) {
-        return intent.getAction().equals(AccountManager.ACTION_AUTHENTICATOR_INTENT)? mAuthenticator.getIBinder() : null;
+        return intent.getAction().equals(AccountManager.ACTION_AUTHENTICATOR_INTENT) ? getAuthenticator().getIBinder() : null;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
     }
 
     private GuruAuthenticator getAuthenticator() {

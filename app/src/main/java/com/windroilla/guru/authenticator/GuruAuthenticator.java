@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.windroilla.guru.GuruApp;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -28,6 +30,7 @@ public class GuruAuthenticator extends AbstractAccountAuthenticator{
     public GuruAuthenticator (Context context) {
         super(context);
         this.context = context;
+        GuruApp.getsInstance().graph().inject(this);
     }
 
     @Override
@@ -72,9 +75,7 @@ public class GuruAuthenticator extends AbstractAccountAuthenticator{
         final String password = accountManager.getPassword(account);
         if (password != null) {
             Log.i(TAG,"Trying to refresh access token");
-            //TODO Change the method of refresh token being acquired and check the injection if necessary
             try {
-                Log.d(TAG, "client_id " + clientId + " client_secret " + clientSecret);
                 AccessToken accessToken = apiService.refreshAccessToken(new RequestAccessTokenByRefresh(password, clientId, clientSecret, AuthConstants.SCOPE_DEFAULT));
                 if (accessToken!=null && !TextUtils.isEmpty(accessToken.getAccessToken())) {
                     bundle.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
