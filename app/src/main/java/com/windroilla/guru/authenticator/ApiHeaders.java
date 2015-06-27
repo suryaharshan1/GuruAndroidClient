@@ -13,8 +13,12 @@ import retrofit.RequestInterceptor;
  */
 public final class ApiHeaders implements RequestInterceptor{
 
-    @Inject
     AccountManager accountManager;
+
+    @Inject
+    public ApiHeaders(AccountManager accountManager) {
+        this.accountManager = accountManager;
+    }
 
     @Override
     public void intercept(RequestFacade request) {
