@@ -44,10 +44,35 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+        Fragment targetFragment = null;
+        switch (position) {
+            case 0:
+                targetFragment = PlaceholderFragment.newInstance(position + 1);
+                break;
+            case 1:
+                targetFragment = PlaceholderFragment.newInstance(position + 1);
+                break;
+            case 2:
+                targetFragment = PlaceholderFragment.newInstance(position + 1);
+                break;
+            case 3:
+                targetFragment = PlaceholderFragment.newInstance(position + 1);
+                break;
+            case 4:
+                targetFragment = PlaceholderFragment.newInstance(position + 1);
+                break;
+            case 5:
+                targetFragment = PlaceholderFragment.newInstance(position + 1);
+                break;
+            default:
+                break;
+        }
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, targetFragment)
                 .commit();
+
+
     }
 
     public void onSectionAttached(int number) {
@@ -60,6 +85,15 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = getString(R.string.title_profile);
+                break;
+            case 5:
+                mTitle = getString(R.string.title_settings);
+                break;
+            case 6:
+                mTitle = getString(R.string.title_help);
                 break;
         }
     }
