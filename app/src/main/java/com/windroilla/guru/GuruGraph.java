@@ -25,4 +25,5 @@ public interface GuruGraph {
 
     void inject(GuruAuthenticator guruAuthenticator);
 
+    void inject(ProfileFragment profileFragment);
 }

@@ -4,8 +4,6 @@ package com.windroilla.guru.authenticator;
  * Created by Surya Harsha Nunnaguppala on 25/6/15.
  */
 
-import java.sql.Blob;
-
 public class UserProfile {
     public int id;
     public String email;
@@ -18,5 +16,5 @@ public class UserProfile {
     public String last_name;
     public String father_name;
     public String address;
-    public Blob image;
+    public String image;
 }

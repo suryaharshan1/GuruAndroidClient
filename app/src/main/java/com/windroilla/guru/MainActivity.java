@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ProfileFragment.OnProfileFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity
                 targetFragment = PlaceholderFragment.newInstance(position + 1);
                 break;
             case 3:
-                targetFragment = PlaceholderFragment.newInstance(position + 1);
+                targetFragment = ProfileFragment.newInstance(position + 1);
                 break;
             case 4:
                 targetFragment = PlaceholderFragment.newInstance(position + 1);
