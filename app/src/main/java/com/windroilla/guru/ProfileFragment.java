@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.windroilla.guru.authenticator.ApiService;
 import com.windroilla.guru.authenticator.UserProfile;
@@ -95,7 +94,6 @@ public class ProfileFragment extends Fragment {
                             @Override
                             public void call(Throwable throwable) {
                                 Log.e(TAG, "Could not load user data " + throwable);
-                                Toast.makeText(getActivity(), "Could not load user data. Please try again!" + throwable, Toast.LENGTH_SHORT).show();
                             }
                         }
                 );
