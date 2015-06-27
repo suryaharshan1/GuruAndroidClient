@@ -1,6 +1,7 @@
 package com.windroilla.guru.authenticator;
 
 import retrofit.http.Body;
+import retrofit.http.GET;
 import retrofit.http.Headers;
 import retrofit.http.POST;
 import rx.Observable;
@@ -17,4 +18,8 @@ public interface ApiService {
 
     @Headers({"Content-Type:application/json-patch+json"})
     @POST("/oauth2/token") Observable<AccessToken> getAccessTokenObservable(@Body RequestAccessTokenByPassword body);
+
+    @Headers({"Content-Type:application/json-patch+json"})
+    @GET("/v1/users/profile")
+    Observable<UserProfile> getUserProfileObservable();
 }
