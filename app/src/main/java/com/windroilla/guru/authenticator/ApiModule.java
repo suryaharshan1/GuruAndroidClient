@@ -24,7 +24,7 @@ import retrofit.converter.GsonConverter;
  */
 @Module
 public final class ApiModule {
-    public static final String PRODUCTION_API_URL = "http://192.168.43.45/guru/";
+    public static final String PRODUCTION_API_URL = "http://192.168.56.1/guru/";
     private static final String CLIENT_ID = "testclient";
     private static final String CLIENT_SECRET = "testpass";
     private Context context;
@@ -48,10 +48,15 @@ public final class ApiModule {
         return Endpoints.newFixedEndpoint(PRODUCTION_API_URL);
     }
 
+    @Provides
+    @Singleton
+    GuruApiAuthenticator provideGuruApiAuthenticator(AccountManager accountManager, Application application) {
+        return new GuruApiAuthenticator(accountManager, application);
+    }
 
     @Provides @Singleton
-    OkHttpClient provideOkHttpClient() {
-        return new OkHttpClient();
+    OkHttpClient provideOkHttpClient(GuruApiAuthenticator guruApiAuthenticator) {
+        return (new OkHttpClient()).setAuthenticator(guruApiAuthenticator);
     }
 
     @Provides
@@ -62,8 +67,8 @@ public final class ApiModule {
 
 
     @Provides @Singleton
-    ApiHeaders provideApiHeaders() {
-        return new ApiHeaders();
+    ApiHeaders provideApiHeaders(AccountManager accountManager) {
+        return new ApiHeaders(accountManager);
     }
 
     @Provides
