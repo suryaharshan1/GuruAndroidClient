@@ -17,6 +17,10 @@ public class RestErrorHandler implements ErrorHandler{
         /*if (r != null && r.getStatus() == 401) {
             //return new UnauthorizedException(cause);
         }*/
+        if (cause.getKind().equals(RetrofitError.Kind.NETWORK)) {
+            //TODO Handle network errors
+        }
+
         if (r != null) {
             switch (r.getStatus()) {
                 case 401:
