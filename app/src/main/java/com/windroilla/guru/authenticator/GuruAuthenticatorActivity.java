@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.windroilla.guru.GuruApp;
 import com.windroilla.guru.MainActivity;
@@ -96,7 +95,6 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
     }
 
     public void submit() {
-
         final String userName = ((TextView) findViewById(R.id.email)).getText().toString();
         final String userPass = ((TextView) findViewById(R.id.password)).getText().toString();
 
@@ -212,8 +210,9 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
                         new Action1<Throwable>() {
                             @Override
                             public void call(Throwable throwable) {
-                                Log.e(TAG, throwable + " Could not sign in");
-                                Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
+                                if (throwable.toString().equals("retrofit.RetrofitError: 401 Unauthorized")) {
+                                    Log.e(TAG, "Wrong Password");
+                                }
                             }
                         }
                 );
