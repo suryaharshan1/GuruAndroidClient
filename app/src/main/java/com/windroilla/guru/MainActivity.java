@@ -1,6 +1,7 @@
 package com.windroilla.guru;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,8 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.windroilla.guru.authenticator.GuruAuthenticatorActivity;
+
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ProfileFragment.OnProfileFragmentInteractionListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ProfileFragment.OnProfileFragmentInteractionListener, LogoutFragment.OnLogoutFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -64,6 +67,9 @@ public class MainActivity extends ActionBarActivity
             case 5:
                 targetFragment = PlaceholderFragment.newInstance(position + 1);
                 break;
+            case 6:
+                targetFragment = LogoutFragment.newInstance();
+                break;
             default:
                 break;
         }
@@ -94,6 +100,9 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 6:
                 mTitle = getString(R.string.title_help);
+                break;
+            case 7:
+                mTitle = getString(R.string.title_logout);
                 break;
         }
     }
@@ -132,6 +141,12 @@ public class MainActivity extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onLogoutFragmentInteraction() {
+        startActivity(new Intent(this, GuruAuthenticatorActivity.class));
+        finish();
     }
 
     /**

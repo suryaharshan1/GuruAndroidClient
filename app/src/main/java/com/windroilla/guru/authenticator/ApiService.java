@@ -22,4 +22,8 @@ public interface ApiService {
     @Headers({"Content-Type:application/json-patch+json"})
     @GET("/v1/users/profile")
     Observable<UserProfile> getUserProfileObservable();
+
+    @Headers({"Content-Type:application/json-patch+json"})
+    @POST("/v1/users/register")
+    Observable<UserProfile> registerNewUser(@Body RequestNewRegistration body);
 }

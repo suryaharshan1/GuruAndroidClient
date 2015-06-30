@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.windroilla.guru.GuruApp;
 import com.windroilla.guru.MainActivity;
 import com.windroilla.guru.R;
+import com.windroilla.guru.SignUp;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,6 +33,8 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
     public static final String KEY_ERROR_MESSAGE = "ERR_MSG";
 
     public final static String PARAM_USER_PASS = "USER_PASS";
+
+    public final static String PARAM_USER_NAME = "USER_NAME";
 
     private final int REQ_SIGNUP = 1;
 
@@ -72,16 +75,15 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
                 submit();
             }
         });
-        //findViewById(R.id.signUp).setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
+        findViewById(R.id.email_sign_up_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 // Since there can only be one GuruAuthenticatorActivity, we call the sign up activity, get his results,
                 // and return them in setAccountAuthenticatorResult(). See finishLogin().
-        //        Intent signup = new Intent(getBaseContext(), SignUpActivity.class);
-        //        signup.putExtras(getIntent().getExtras());
-        //        startActivityForResult(signup, REQ_SIGNUP);
-        //    }
-        //});
+                Intent signup = new Intent(getBaseContext(), SignUp.class);
+                startActivityForResult(signup, REQ_SIGNUP);
+            }
+        });
     }
 
     @Override
@@ -89,9 +91,13 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
 
         // The sign up activity returned that the user has successfully created an account
         if (requestCode == REQ_SIGNUP && resultCode == RESULT_OK) {
-            finishLogin(data);
+            finishSignUpwithLogin(data);
         } else
             super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void finishSignUpwithLogin(Intent intent) {
+        doLogin(intent.getStringExtra(PARAM_USER_NAME), intent.getStringExtra(PARAM_USER_PASS));
     }
 
     public void submit() {
