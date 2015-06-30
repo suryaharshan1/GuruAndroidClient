@@ -15,5 +15,6 @@
         android:id="@+id/profile_list_info"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="2"></ListView>
+        android:layout_weight="2"
+        android:divider="@null"></ListView>
 </LinearLayout>

@@ -18,4 +18,16 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_example">Example action</string>
+    <string name="title_activity_sign_up">SignUp</string>
+
+    <string name="profile_first_name">first name</string>
+    <string name="profile_last_name">last name</string>
+    <string name="profile_mobile_number">mobile number</string>
+    <string name="profile_email">email</string>
+    <string name="profile_ambition">ambition</string>
+    <string name="profile_father_name">father name</string>
+    <string name="profile_address">address</string>
+    <string name="password">password</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="profile_user_from">user from</string>
 </resources>

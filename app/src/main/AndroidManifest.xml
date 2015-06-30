@@ -49,7 +49,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:label="@string/title_activity_main" />
+        <activity
+            android:name=".SignUp"
+            android:label="@string/title_activity_sign_up"
+            android:parentActivityName=".authenticator.GuruAuthenticatorActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.windroilla.guru.authenticator.GuruAuthenticatorActivity" />
+        </activity>
     </application>
 
 </manifest>

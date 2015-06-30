@@ -5,15 +5,19 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.windroilla.guru.authenticator.ApiService;
 import com.windroilla.guru.authenticator.UserProfile;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -69,12 +73,13 @@ public class ProfileFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         final ImageView profilePicture = (ImageView) rootView.findViewById(R.id.profile_picture);
+        final ListView profileInfo = (ListView) rootView.findViewById(R.id.profile_list_info);
         apiService.getUserProfileObservable()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<UserProfile>() {
                                @Override
-                               public void call(UserProfile userProfile) {
+                               public void call(final UserProfile userProfile) {
                                    if (userProfile == null) {
                                        Log.e(TAG, "No user profile returned from the server");
                                        return;
@@ -84,10 +89,36 @@ public class ProfileFragment extends Fragment {
                                        profilePicture.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                                        profilePicture.setAdjustViewBounds(false);
                                        profilePicture.setImageBitmap(BitmapFactory.decodeByteArray(file, 0, file.length));
-
                                    } else {
                                        profilePicture.setImageResource(R.mipmap.ic_launcher);
                                    }
+                                   profileInfo.setAdapter(new ProfileAdapter(
+                                           getActivity(),
+                                           new ArrayList<String>() {
+                                               {
+                                                   add(getString(R.string.profile_first_name));
+                                                   add(getString(R.string.profile_last_name));
+                                                   add(getString(R.string.profile_mobile_number));
+                                                   add(getString(R.string.profile_email));
+                                                   add(getString(R.string.profile_ambition));
+                                                   add(getString(R.string.profile_father_name));
+                                                   add(getString(R.string.profile_address));
+                                                   add(getString(R.string.profile_user_from));
+                                               }
+                                           },
+                                           new ArrayList<String>() {
+                                               {
+                                                   add(userProfile.first_name);
+                                                   add(TextUtils.isEmpty(userProfile.last_name) ? " " : userProfile.last_name);
+                                                   add(userProfile.mobile_number);
+                                                   add(userProfile.email);
+                                                   add(TextUtils.isEmpty(userProfile.ambition) ? " " : userProfile.ambition);
+                                                   add(TextUtils.isEmpty(userProfile.father_name) ? " " : userProfile.father_name);
+                                                   add(userProfile.address);
+                                                   add(userProfile.created_at);
+                                               }
+                                           }
+                                   ));
                                }
                            },
                         new Action1<Throwable>() {
