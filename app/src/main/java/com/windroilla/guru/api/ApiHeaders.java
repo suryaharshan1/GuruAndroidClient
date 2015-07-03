@@ -1,8 +1,10 @@
-package com.windroilla.guru.authenticator;
+package com.windroilla.guru.api;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.text.TextUtils;
+
+import com.windroilla.guru.authenticator.AuthConstants;
 
 import javax.inject.Inject;
 

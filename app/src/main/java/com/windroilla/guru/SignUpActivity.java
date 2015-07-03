@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.windroilla.guru.authenticator.ApiService;
+import com.windroilla.guru.api.ApiService;
+import com.windroilla.guru.api.RequestNewRegistration;
+import com.windroilla.guru.api.UserProfile;
 import com.windroilla.guru.authenticator.GuruAuthenticatorActivity;
-import com.windroilla.guru.authenticator.RequestNewRegistration;
-import com.windroilla.guru.authenticator.UserProfile;
 
 import javax.inject.Inject;
 
@@ -21,9 +21,9 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-public class SignUp extends ActionBarActivity {
+public class SignUpActivity extends ActionBarActivity {
 
-    public final static String TAG = SignUp.class.getSimpleName();
+    public final static String TAG = SignUpActivity.class.getSimpleName();
 
     @Inject
     ApiService apiService;

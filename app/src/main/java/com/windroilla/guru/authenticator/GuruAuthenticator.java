@@ -12,6 +12,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.windroilla.guru.GuruApp;
+import com.windroilla.guru.api.AccessToken;
+import com.windroilla.guru.api.ApiService;
+import com.windroilla.guru.api.RequestAccessTokenByRefresh;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,7 +28,8 @@ public class GuruAuthenticator extends AbstractAccountAuthenticator{
     private final Context context;
     @Inject @Named("ClientId") String clientId;
     @Inject @Named("ClientSecret") String clientSecret;
-    @Inject ApiService apiService;
+    @Inject
+    ApiService apiService;
 
     public GuruAuthenticator (Context context) {
         super(context);

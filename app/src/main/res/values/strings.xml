@@ -15,6 +15,10 @@
     <string name="title_help">Help/Feedback</string>
     <string name="title_logout">Logout</string>
 
+    <string name="profile_picture">Profile Picture</string>
+    <string name="display_camera_button">Use Camera</string>
+    <string name="message_crop_picture">Move / resize to crop the picture</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -34,4 +38,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_profile_picture_display">Profile Picture</string>
+    <string name="title_activity_image_crop">ImageCropActivity</string>
 </resources>

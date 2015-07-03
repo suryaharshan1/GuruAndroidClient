@@ -1,8 +1,11 @@
-package com.windroilla.guru.authenticator;
+package com.windroilla.guru.api;
+
+import java.util.HashMap;
 
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Headers;
+import retrofit.http.PATCH;
 import retrofit.http.POST;
 import rx.Observable;
 
@@ -26,4 +29,8 @@ public interface ApiService {
     @Headers({"Content-Type:application/json-patch+json"})
     @POST("/v1/users/register")
     Observable<UserProfile> registerNewUser(@Body RequestNewRegistration body);
+
+    @Headers({"Content-Type:application/json-patch+json"})
+    @PATCH("/v1/users/update")
+    Observable<UserProfile> updateUserProfile(@Body HashMap<String, String> body);
 }

@@ -13,7 +13,10 @@ import android.widget.TextView;
 import com.windroilla.guru.GuruApp;
 import com.windroilla.guru.MainActivity;
 import com.windroilla.guru.R;
-import com.windroilla.guru.SignUp;
+import com.windroilla.guru.SignUpActivity;
+import com.windroilla.guru.api.AccessToken;
+import com.windroilla.guru.api.ApiService;
+import com.windroilla.guru.api.RequestAccessTokenByPassword;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -80,7 +83,7 @@ public class GuruAuthenticatorActivity extends AccountAuthenticatorActivity {
             public void onClick(View v) {
                 // Since there can only be one GuruAuthenticatorActivity, we call the sign up activity, get his results,
                 // and return them in setAccountAuthenticatorResult(). See finishLogin().
-                Intent signup = new Intent(getBaseContext(), SignUp.class);
+                Intent signup = new Intent(getBaseContext(), SignUpActivity.class);
                 startActivityForResult(signup, REQ_SIGNUP);
             }
         });

@@ -1,4 +1,4 @@
-package com.windroilla.guru.authenticator;
+package com.windroilla.guru.api;
 
 import android.util.Log;
 

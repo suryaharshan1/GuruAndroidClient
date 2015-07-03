@@ -1,4 +1,4 @@
-package com.windroilla.guru.authenticator;
+package com.windroilla.guru.api;
 
 import android.accounts.AccountManager;
 import android.app.Application;
@@ -24,7 +24,7 @@ import retrofit.converter.GsonConverter;
  */
 @Module
 public final class ApiModule {
-    public static final String PRODUCTION_API_URL = "http://192.168.56.1/guru/";
+    public static final String PRODUCTION_API_URL = "http://192.168.43.45/guru/";
     private static final String CLIENT_ID = "testclient";
     private static final String CLIENT_SECRET = "testpass";
     private Context context;

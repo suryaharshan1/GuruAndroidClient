@@ -1,4 +1,4 @@
-package com.windroilla.guru.authenticator;
+package com.windroilla.guru.api;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -11,6 +11,7 @@ import android.util.Log;
 import com.squareup.okhttp.Authenticator;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.windroilla.guru.authenticator.AuthConstants;
 
 import java.io.IOException;
 import java.net.Proxy;

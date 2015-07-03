@@ -1,4 +1,4 @@
-package com.windroilla.guru.authenticator;
+package com.windroilla.guru.api;
 
 /**
  * Created by Surya Harsha Nunnaguppala on 24/6/15.
