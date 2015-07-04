@@ -1,7 +1,7 @@
 package com.windroilla.guru;
 
-import com.windroilla.guru.authenticator.ApiHeaders;
-import com.windroilla.guru.authenticator.ApiModule;
+import com.windroilla.guru.api.ApiHeaders;
+import com.windroilla.guru.api.ApiModule;
 import com.windroilla.guru.authenticator.GuruAuthenticator;
 import com.windroilla.guru.authenticator.GuruAuthenticatorActivity;
 
@@ -27,7 +27,9 @@ public interface GuruGraph {
 
     void inject(ProfileFragment profileFragment);
 
-    void inject(SignUp signUp);
+    void inject(SignUpActivity signUpActivity);
 
     void inject(LogoutFragment logoutFragment);
+
+    void inject(ProfilePictureDisplay profilePictureDisplay);
 }

@@ -1,23 +1,30 @@
 package com.windroilla.guru;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.windroilla.guru.authenticator.ApiService;
-import com.windroilla.guru.authenticator.UserProfile;
+import com.windroilla.guru.api.ApiService;
+import com.windroilla.guru.api.UserProfile;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -36,10 +43,12 @@ import rx.schedulers.Schedulers;
  */
 public class ProfileFragment extends Fragment {
 
+    public final static int REQUEST_DISPLAY_PICTURE = 0x1;
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static final String TAG = ProfileFragment.class.getSimpleName();
     @Inject
     ApiService apiService;
+    private ImageView profilePicture;
     private OnProfileFragmentInteractionListener mListener;
 
     public ProfileFragment() {
@@ -70,9 +79,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        final View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-        final ImageView profilePicture = (ImageView) rootView.findViewById(R.id.profile_picture);
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.SettingsTheme);
+        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+        final View rootView = localInflater.inflate(R.layout.fragment_profile, container, false);
+        profilePicture = (ImageView) rootView.findViewById(R.id.profile_picture);
         final ListView profileInfo = (ListView) rootView.findViewById(R.id.profile_list_info);
         apiService.getUserProfileObservable()
                 .subscribeOn(Schedulers.newThread())
@@ -84,7 +94,7 @@ public class ProfileFragment extends Fragment {
                                        Log.e(TAG, "No user profile returned from the server");
                                        return;
                                    }
-                                   if (userProfile.image != null) {
+                                   if (!TextUtils.isEmpty(userProfile.image)) {
                                        byte[] file = Base64.decode(userProfile.image, Base64.DEFAULT);
                                        profilePicture.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                                        profilePicture.setAdjustViewBounds(false);
@@ -128,24 +138,71 @@ public class ProfileFragment extends Fragment {
                             }
                         }
                 );
+        profileInfo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), profileInfo.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        profilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //mListener.OnProfilePictureClick();
+                Intent intent = new Intent(getActivity(), ProfilePictureDisplay.class);
+                startActivityForResult(intent, REQUEST_DISPLAY_PICTURE);
+            }
+        });
         return rootView;
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            //    mListener.onProfileFragmentInteraction(uri);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_DISPLAY_PICTURE:
+                if (data != null && resultCode == Activity.RESULT_OK) {
+                    Toast.makeText(getActivity(), data.getStringExtra(ProfilePictureDisplay.ARG_IMAGE_PATH), Toast.LENGTH_SHORT).show();
+                    String imagePath = data.getStringExtra(ProfilePictureDisplay.ARG_IMAGE_PATH);
+                    if (!TextUtils.isEmpty(imagePath)) {
+                        final Bitmap myBitmap = BitmapFactory.decodeFile(imagePath);
+                        profilePicture.setImageBitmap(myBitmap);
+                        final ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        myBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        HashMap<String, String> updateData = new HashMap<>();
+                        updateData.put("image", Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT));
+                        apiService.updateUserProfile(updateData)
+                                .retry(5)
+                                .subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Action1<UserProfile>() {
+                                               @Override
+                                               public void call(UserProfile userProfile) {
+                                                   Log.d(TAG, "Uploaded Profile Picture");
+                                               }
+                                           },
+                                        new Action1<Throwable>() {
+                                            @Override
+                                            public void call(Throwable throwable) {
+                                                Log.e(TAG, "Could not upload the profile picture due to error " + throwable);
+                                            }
+                                        });
+                    }
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
         }
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        /*try {
-            mListener = (OnFragmentInteractionListener) activity;
+        try {
+            mListener = (OnProfileFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
-        }*/
+        }
         if (getArguments() != null) {
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
@@ -169,7 +226,7 @@ public class ProfileFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnProfileFragmentInteractionListener {
-        //public void onProfileFragmentInteraction(Uri uri);
+        void OnProfilePictureClick();
     }
 
 }

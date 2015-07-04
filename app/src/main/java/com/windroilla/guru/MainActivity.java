@@ -149,6 +149,10 @@ public class MainActivity extends ActionBarActivity
         finish();
     }
 
+    @Override
+    public void OnProfilePictureClick() {
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */

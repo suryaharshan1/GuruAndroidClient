@@ -2,7 +2,7 @@ package com.windroilla.guru;
 
 import android.app.Application;
 
-import com.windroilla.guru.authenticator.ApiModule;
+import com.windroilla.guru.api.ApiModule;
 
 /**
  * Created by Surya Harsha Nunnaguppala on 23/6/15.

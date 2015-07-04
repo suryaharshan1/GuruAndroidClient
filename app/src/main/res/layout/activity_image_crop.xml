@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.windroilla.guru.ImageCropActivity">
+
+    <com.windroilla.guru.imagecrop.photoview.PhotoView
+        android:id="@+id/image_crop_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="center" />
+
+    <com.windroilla.guru.imagecrop.cropoverlay.CropOverlayView
+        android:id="@+id/image_crop_cropoverlay"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:guideLines="false"
+        app:marginSide="10dp"
+        app:marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/tv_move_resize_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:text="@string/message_crop_picture"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/crop_bottom_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/guru_blue"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
+
+        <ImageButton
+            android:id="@+id/crop_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="16dip"
+            android:background="@null"
+            android:contentDescription="@string/display_camera_button"
+            android:padding="6dip"
+            android:src="@android:drawable/ic_menu_crop" />
+
+        <ImageButton
+            android:id="@+id/crop_select_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="16dip"
+            android:background="@null"
+            android:contentDescription="@string/display_camera_button"
+            android:padding="6dip"
+            android:src="@android:drawable/ic_menu_camera" />
+
+        <ImageButton
+            android:id="@+id/crop_select_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:contentDescription="@string/display_camera_button"
+            android:padding="6dip"
+            android:src="@android:drawable/ic_menu_gallery" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
