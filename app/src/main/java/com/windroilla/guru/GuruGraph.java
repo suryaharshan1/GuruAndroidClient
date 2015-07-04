@@ -32,4 +32,6 @@ public interface GuruGraph {
     void inject(LogoutFragment logoutFragment);
 
     void inject(ProfilePictureDisplay profilePictureDisplay);
+
+    void inject(CoursesFragment coursesFragment);
 }

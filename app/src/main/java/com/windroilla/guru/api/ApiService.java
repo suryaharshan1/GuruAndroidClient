@@ -1,6 +1,7 @@
 package com.windroilla.guru.api;
 
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -33,4 +34,8 @@ public interface ApiService {
     @Headers({"Content-Type:application/json-patch+json"})
     @PATCH("/v1/users/update")
     Observable<UserProfile> updateUserProfile(@Body HashMap<String, String> body);
+
+    @Headers({"Content-Type:application/json-patch+json"})
+    @GET("/v1/courses")
+    Observable<List<Course>> getAvailableCourseList();
 }

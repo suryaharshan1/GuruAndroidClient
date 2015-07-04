@@ -17,7 +17,10 @@ import android.view.ViewGroup;
 import com.windroilla.guru.authenticator.GuruAuthenticatorActivity;
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ProfileFragment.OnProfileFragmentInteractionListener, LogoutFragment.OnLogoutFragmentInteractionListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+        ProfileFragment.OnProfileFragmentInteractionListener,
+        LogoutFragment.OnLogoutFragmentInteractionListener,
+        CoursesFragment.OnCoursesFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -62,12 +65,15 @@ public class MainActivity extends ActionBarActivity
                 targetFragment = ProfileFragment.newInstance(position + 1);
                 break;
             case 4:
-                targetFragment = PlaceholderFragment.newInstance(position + 1);
+                targetFragment = CoursesFragment.newInstance(position + 1);
                 break;
             case 5:
                 targetFragment = PlaceholderFragment.newInstance(position + 1);
                 break;
             case 6:
+                targetFragment = PlaceholderFragment.newInstance(position + 1);
+                break;
+            case 7:
                 targetFragment = LogoutFragment.newInstance();
                 break;
             default:
@@ -96,12 +102,15 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_profile);
                 break;
             case 5:
-                mTitle = getString(R.string.title_settings);
+                mTitle = getString(R.string.title_courses);
                 break;
             case 6:
-                mTitle = getString(R.string.title_help);
+                mTitle = getString(R.string.title_settings);
                 break;
             case 7:
+                mTitle = getString(R.string.title_help);
+                break;
+            case 8:
                 mTitle = getString(R.string.title_logout);
                 break;
         }
