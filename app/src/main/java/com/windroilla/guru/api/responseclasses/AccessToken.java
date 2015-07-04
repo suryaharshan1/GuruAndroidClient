@@ -1,4 +1,4 @@
-package com.windroilla.guru.api;
+package com.windroilla.guru.api.responseclasses;
 
 /**
  * Created by Surya Harsha Nunnaguppala on 19/6/15.

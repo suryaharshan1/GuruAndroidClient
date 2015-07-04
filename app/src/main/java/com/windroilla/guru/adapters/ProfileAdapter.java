@@ -1,4 +1,4 @@
-package com.windroilla.guru;
+package com.windroilla.guru.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.windroilla.guru.R;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.windroilla.guru;
+package com.windroilla.guru.adapters;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.windroilla.guru.api.Course;
+import com.windroilla.guru.R;
+import com.windroilla.guru.api.responseclasses.Course;
 
 import java.util.List;
 

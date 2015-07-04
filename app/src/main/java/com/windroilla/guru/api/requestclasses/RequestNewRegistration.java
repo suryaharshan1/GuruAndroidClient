@@ -1,4 +1,4 @@
-package com.windroilla.guru.api;
+package com.windroilla.guru.api.requestclasses;
 
 /**
  * Created by Surya Harsha Nunnaguppala on 30/6/15.
