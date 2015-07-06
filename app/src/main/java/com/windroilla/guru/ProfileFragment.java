@@ -19,8 +19,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.windroilla.guru.adapters.ProfileAdapter;
 import com.windroilla.guru.api.ApiService;
-import com.windroilla.guru.api.UserProfile;
+import com.windroilla.guru.api.responseclasses.UserProfile;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class ProfileFragment extends Fragment {
                                    }
                                    if (!TextUtils.isEmpty(userProfile.image)) {
                                        byte[] file = Base64.decode(userProfile.image, Base64.DEFAULT);
-                                       profilePicture.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                                       profilePicture.setScaleType(ImageView.ScaleType.CENTER);
                                        profilePicture.setAdjustViewBounds(false);
                                        profilePicture.setImageBitmap(BitmapFactory.decodeByteArray(file, 0, file.length));
                                    } else {

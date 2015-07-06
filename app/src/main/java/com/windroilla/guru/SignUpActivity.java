@@ -11,8 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.windroilla.guru.api.ApiService;
-import com.windroilla.guru.api.RequestNewRegistration;
-import com.windroilla.guru.api.UserProfile;
+import com.windroilla.guru.api.requestclasses.RequestNewRegistration;
+import com.windroilla.guru.api.responseclasses.UserProfile;
 import com.windroilla.guru.authenticator.GuruAuthenticatorActivity;
 
 import javax.inject.Inject;

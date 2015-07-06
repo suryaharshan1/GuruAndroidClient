@@ -1,5 +1,12 @@
 package com.windroilla.guru.api;
 
+import com.windroilla.guru.api.requestclasses.RequestAccessTokenByPassword;
+import com.windroilla.guru.api.requestclasses.RequestAccessTokenByRefresh;
+import com.windroilla.guru.api.requestclasses.RequestNewRegistration;
+import com.windroilla.guru.api.responseclasses.AccessToken;
+import com.windroilla.guru.api.responseclasses.Course;
+import com.windroilla.guru.api.responseclasses.UserProfile;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,7 +22,8 @@ import rx.Observable;
  */
 public interface ApiService {
     @Headers({"Content-Type:application/json-patch+json"})
-    @POST("/oauth2/token") AccessToken getAccessToken(@Body RequestAccessTokenByPassword body);
+    @POST("/oauth2/token")
+    AccessToken getAccessToken(@Body RequestAccessTokenByPassword body);
 
     @Headers({"Content-Type:application/json-patch+json"})
     @POST("/oauth2/token") AccessToken refreshAccessToken(@Body RequestAccessTokenByRefresh body);

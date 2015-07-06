@@ -10,8 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.windroilla.guru.adapters.CoursesAdapter;
 import com.windroilla.guru.api.ApiService;
-import com.windroilla.guru.api.Course;
+import com.windroilla.guru.api.responseclasses.Course;
 
 import java.util.List;
 
@@ -88,7 +89,7 @@ public class CoursesFragment extends Fragment {
                         new Action1<List<Course>>() {
                             @Override
                             public void call(List<Course> courses) {
-                                mAdapter = new CoursesAdapter(courses);
+                                mAdapter = new CoursesAdapter(getActivity(), courses);
                                 recyclerView.setAdapter(mAdapter);
                             }
                         },
@@ -99,6 +100,7 @@ public class CoursesFragment extends Fragment {
                             }
                         }
                 );
+
         return view;
     }
 

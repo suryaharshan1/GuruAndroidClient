@@ -2,6 +2,8 @@ package com.windroilla.guru.api;
 
 import android.util.Log;
 
+import com.windroilla.guru.api.responseclasses.GuruApiErrorResponse;
+
 import retrofit.ErrorHandler;
 import retrofit.RetrofitError;
 import retrofit.client.Response;

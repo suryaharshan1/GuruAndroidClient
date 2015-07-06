@@ -37,6 +37,16 @@
     <string name="confirm_password">confirm password</string>
     <string name="profile_user_from">user from</string>
 
+    <string name="courses_type">Type</string>
+    <string name="courses_institute">Institute</string>
+    <string name="courses_fee">Fee</string>
+    <string name="courses_validity">Validity</string>
+    <string name="courses_registrations">Registrations till date</string>
+    <string name="courses_manager">Course Manager</string>
+    <string name="courses_discuss">Discuss</string>
+    <string name="courses_strategy">Strategy</string>
+    <string name="courses_join">Join</string>
+
     <string name="title_activity_profile_picture_display">Profile Picture</string>
     <string name="title_activity_image_crop">ImageCropActivity</string>
 </resources>

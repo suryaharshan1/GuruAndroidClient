@@ -14,9 +14,9 @@ import com.windroilla.guru.GuruApp;
 import com.windroilla.guru.MainActivity;
 import com.windroilla.guru.R;
 import com.windroilla.guru.SignUpActivity;
-import com.windroilla.guru.api.AccessToken;
 import com.windroilla.guru.api.ApiService;
-import com.windroilla.guru.api.RequestAccessTokenByPassword;
+import com.windroilla.guru.api.requestclasses.RequestAccessTokenByPassword;
+import com.windroilla.guru.api.responseclasses.AccessToken;
 
 import javax.inject.Inject;
 import javax.inject.Named;

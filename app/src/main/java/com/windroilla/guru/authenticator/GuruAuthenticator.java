@@ -12,9 +12,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.windroilla.guru.GuruApp;
-import com.windroilla.guru.api.AccessToken;
 import com.windroilla.guru.api.ApiService;
-import com.windroilla.guru.api.RequestAccessTokenByRefresh;
+import com.windroilla.guru.api.requestclasses.RequestAccessTokenByRefresh;
+import com.windroilla.guru.api.responseclasses.AccessToken;
 
 import javax.inject.Inject;
 import javax.inject.Named;

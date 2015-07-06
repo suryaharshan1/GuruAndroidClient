@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.windroilla.guru.api.ApiService;
-import com.windroilla.guru.api.UserProfile;
+import com.windroilla.guru.api.responseclasses.UserProfile;
 
 import javax.inject.Inject;
 
